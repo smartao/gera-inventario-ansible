@@ -1,0 +1,22 @@
+# Localizacao do arquivo que contem as credencias do banco de dados para conexao
+source /home/smartao/credenciaisdb
+
+# Conectando no banco de dados, variaveis importada do arquivo credenciaisdb
+CONEXAO="-u$USUARIO -h $SERVER -p$SENHA"
+
+# Arquivo que contem os host que sera ignorados pelo relatório
+HOSTIGNORADOS="hostignorados"
+
+# Query no bando de dados para ser realizada
+QUERY="SELECT CI,IP,Tipo,Site,Descricao FROM itmgmt.servidoresxservicos WHERE SO like 'linux';"
+
+# Diretorio para arquivos temproarios
+DIR="/tmp" 
+
+# Arquivo de diretorio temporario
+ARQT="reltemp"
+
+USER=root
+PORTA[1]=2222 # porta ssh para validar o acesso
+PORTA[2]=22 # Porta ssh para validar o acesso
+TIME=10 # Tempo para executar o timeout no comando
