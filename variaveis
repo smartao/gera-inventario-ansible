@@ -1,22 +1,28 @@
 # Localizacao do arquivo que contem as credencias do banco de dados para conexao
+# Exemplo do arquivo (linhas nao pode estar comentadas)
+#SERVER="servidorbandodedados.dominio.local"
+#DB="meubancodedados"
+#USUARIO="usaariobancodedados"
+#SENHA="senhabancodedados"
 source /home/smartao/credenciaisdb
 
 # Conectando no banco de dados, variaveis importada do arquivo credenciaisdb
 CONEXAO="-u$USUARIO -h $SERVER -p$SENHA"
 
-# Arquivo que contem os host que sera ignorados pelo relatório
+# Arquivo que contem os host que serao ignorados pelo relatório
+# Nesse arquivo deve conter um host por linha, pondendo haver comentarios
+# Ansible Server
+#srv19964
+# Servidor para ser ignorado
+#srvxpto
 HOSTIGNORADOS="hostignorados"
 
 # Query no bando de dados para ser realizada
 QUERY="SELECT CI,IP,Tipo,Site,Descricao FROM itmgmt.servidoresxservicos WHERE SO like 'linux';"
 
-# Diretorio para arquivos temproarios
-DIR="/tmp" 
-
-# Arquivo de diretorio temporario
-ARQT="reltemp"
-
-USER=root
+DIR="/tmp/relatorios" # Diretorio que contera os relatorios usado pelo ansible
+ARQF="relatorio-filtrado" # Arquivo com relatorio tirado do bando de dados filtrando os host ignorados do arquivo
+ARQT="temp" # Arquivo para dados temporario
 PORTA[1]=2222 # porta ssh para validar o acesso
 PORTA[2]=22 # Porta ssh para validar o acesso
-TIME=10 # Tempo para executar o timeout no comando
+TIME=10 # Tempo para executar o timeout no comando nmap

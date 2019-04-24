@@ -1,5 +1,11 @@
+# Falta configurar IP
+srv21003
+# Sera desligado
+srv19474
 # Ansible Server
 srv19964
+# NetApp OnCommand
+srv21007
 # Telefonia Instant
 SPSERVER121
 srv1304
