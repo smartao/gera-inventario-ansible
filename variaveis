@@ -15,7 +15,7 @@ CONEXAO="-u$USUARIO -h $SERVER -p$SENHA"
 #srv19964
 # Servidor para ser ignorado
 #srvxpto
-HOSTIGNORADOS="source /usr/local/bin/gera-inventario-ansible/hostignorados"
+HOSTIGNORADOS="/usr/local/bin/gera-inventario-ansible/hostignorados"
 
 # Query no bando de dados para ser realizada
 QUERY="SELECT CI,IP,Tipo,Site,Descricao FROM itmgmt.servidoresxservicos WHERE SO like 'linux';"
