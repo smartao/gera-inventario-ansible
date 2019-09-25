@@ -1,6 +1,5 @@
 #!/bin/bash
 #
-
 source variaveis # Carregando arquivo que contem as variaveis
 mkdir $DIR > /dev/null 2>&1 # Criando o diretorio para os relatorios
 
