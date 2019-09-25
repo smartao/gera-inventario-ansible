@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-source variaveis # Carregando arquivo que contem as variaveis
+source /usr/local/bin/gera-inventario-ansible/variaveis # Carregando arquivo que contem as variaveis
 mkdir $DIR > /dev/null 2>&1 # Criando o diretorio para os relatorios
 
 # Funcao principal MAIN que executara as demais funcoes
