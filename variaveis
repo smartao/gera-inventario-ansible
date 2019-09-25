@@ -21,8 +21,9 @@ HOSTIGNORADOS="hostignorados"
 QUERY="SELECT CI,IP,Tipo,Site,Descricao FROM itmgmt.servidoresxservicos WHERE SO like 'linux';"
 
 DIR="/tmp/relatorios" # Diretorio que contera os relatorios usado pelo ansible
-ARQF="relatorio-filtrado" # Arquivo com relatorio tirado do bando de dados filtrando os host ignorados do arquivo
+ARQF="zrelatorio-filtrado" # Arquivo com relatorio tirado do bando de dados filtrando os host ignorados do arquivo
 ARQT="temp" # Arquivo para dados temporario
+RELFULL="rel-full"
 PORTA[1]=2222 # porta ssh para validar o acesso
 PORTA[2]=22 # Porta ssh para validar o acesso
 TIME=10 # Tempo para executar o timeout no comando nmap

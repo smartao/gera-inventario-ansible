@@ -1,21 +1,27 @@
-# Falta configurar IP
-srv21003
-# Sera desligado
+#Sera-desligado
 srv19474
-# Ansible Server
+#Ansible-Server
 srv19964
-# NetApp OnCommand
+#NetApp-OnCommand
 srv21007
-# Telefonia Instant
+#VSC-Netapp-SMVI
+srv21056
+srv21163
+srv21093
+#Spectrum-Protect-Plus
+srv21206
+#FTP-temp-infra
+srv21353
+#Telefonia-Instant
 SPSERVER121
 srv1304
 srv17275
 srv19349
-# Firewall
+#Firewall
 FWAlpha
-# Citrix Netscaler
+#Citrix-Netscaler
 SPSERVER193
-# Wanos
+#Wanos
 WANOSALPHA
 WANOSBV
 WANOSMAL

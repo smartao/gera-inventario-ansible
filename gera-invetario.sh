@@ -7,9 +7,9 @@ mkdir $DIR > /dev/null 2>&1 # Criando o diretorio para os relatorios
 # Funcao principal MAIN que executara as demais funcoes
 function MAIN(){
 	CARREGASERVIDORES
-    COLETAINFO
+	COLETAINFO
 	VALIDASSH
-    GERAINVENTARIOS
+	GERAINVENTARIOS
 }
 # Funcao que faz a query no banco de dados e armazenar todas as informacoes em vetores
 function CARREGASERVIDORES(){
@@ -59,8 +59,9 @@ function VALIDASSH(){ # Funcao para validar em qual porta SSH o servidor esta ou
 	done
 }
 function GERAINVENTARIOS(){ # Funcao para gerar relatorio na padrao do ansible IP:Porta
+	> $DIR/$RELFULL # Limpar arquivo de relatorio de servidores
     for((s=1;s<=${#IP[@]};s++));do # loop para correr todos os IP do relatorio
-        echo ${IP[$s]}:${PORTASSH[$s]} >> $DIR/rel-Full # Gerando reladorio completo em unico arquivo
+        echo ${IP[$s]}:${PORTASSH[$s]} >> $DIR/$RELFULL # Gerando reladorio completo em unico arquivo
         for((a=1;a<=${#LISTASITE[@]};a++));do # Loop
             if [ "${SITE[$s]}" == "${LISTASITE[$a]}" ];then
                 echo "${IP[$s]}:${PORTASSH[$s]}" >> $DIR/"rel-${LISTASITE[$a]// /-}-all"
