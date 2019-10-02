@@ -2,6 +2,7 @@
 #
 source /usr/local/bin/gera-inventario-ansible/variaveis # Carregando arquivo que contem as variaveis
 mkdir $DIR > /dev/null 2>&1 # Criando o diretorio para os relatorios
+rm $DIR/rel* > /dev/null 2>&1 # Deletar os relatorio já criados
 
 # Funcao principal MAIN que executara as demais funcoes
 function MAIN(){
@@ -59,14 +60,17 @@ function VALIDASSH(){ # Funcao para validar em qual porta SSH o servidor esta ou
 }
 function GERAINVENTARIOS(){ # Funcao para gerar relatorio na padrao do ansible IP:Porta
 	> $DIR/$RELFULL # Limpar arquivo de relatorio de servidores
-    for((s=1;s<=${#IP[@]};s++));do # loop para correr todos os IP do relatorio
+    for((s=1;s<=${#IP[@]};s++));do # Loop para correr todos os IP do relatorio
         echo ${IP[$s]}:${PORTASSH[$s]} >> $DIR/$RELFULL # Gerando reladorio completo em unico arquivo
-        for((a=1;a<=${#LISTASITE[@]};a++));do # Loop
+        for((a=1;a<=${#LISTASITE[@]};a++));do # Loop que corre toda LISTASITE
+            # Se o SITE do host for igual a lista do Site
             if [ "${SITE[$s]}" == "${LISTASITE[$a]}" ];then
-                echo "${IP[$s]}:${PORTASSH[$s]}" >> $DIR/"rel-${LISTASITE[$a]// /-}-all"
-                for((m=1;m<=${#LISTATIPO[@]};m++));do
+                # Imprimindo no arquivo IP e porta SSH
+                echo "${CI[$s]} ansible_ssh_host=${IP[$s]} ansible_ssh_port=${PORTASSH[$s]}" >> $DIR/"rel-${LISTASITE[$a]// /-}-all"
+                for((m=1;m<=${#LISTATIPO[@]};m++));do # Loop que corre todos os tipo de servidores LISTATIPO
                     if [ "${TIPO[$s]}" == "${LISTATIPO[$m]}" ];then
-                        echo "${IP[$s]}:${PORTASSH[$s]}" >> $DIR/"rel-${LISTASITE[$a]// /-}-${LISTATIPO[$m]// /-}"
+                        # Se o TIPO do host for igual a LISTATIPO, gera arquivo com o tipo
+                        echo "${CI[$s]} ansible_ssh_host=${IP[$s]} ansible_ssh_port=${PORTASSH[$s]}" >> $DIR/"rel-${LISTASITE[$a]// /-}-${LISTATIPO[$m]// /-}"
                     fi
                 done
             fi
@@ -74,11 +78,11 @@ function GERAINVENTARIOS(){ # Funcao para gerar relatorio na padrao do ansible I
     done
     # Adicionando [all] no inicio do arquivos necessário para o ansible funcionar e alterando para letras minusculas
     for i in `ls $DIR/rel-*`;do # loop que le todos os arquivos comecados por "rel-"
-        sed -i '1 i\[all]' $i # Sed que adiciona [all] na primeira linha
-        if [ $i != ${i,,} ];then # Se os arquivos estiverem com letras maiusculas
-            mv $i ${i,,} # Renomeando os arquivos, trocando letras maisculas apenas letras minusculas
-        fi
-    done
+         sed -i '1 i\[all]' $i # Sed que adiciona [all] na primeira linha
+         if [ $i != ${i,,} ];then # Se os arquivos estiverem com letras maiusculas
+             mv $i ${i,,} # Renomeando os arquivos, trocando letras maisculas apenas letras minusculas
+         fi
+     done
 }
 MAIN # Executandoa funcao principal MAIN
 exit;
