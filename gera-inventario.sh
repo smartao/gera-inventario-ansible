@@ -61,7 +61,8 @@ function VALIDASSH(){ # Funcao para validar em qual porta SSH o servidor esta ou
 function GERAINVENTARIOS(){ # Funcao para gerar relatorio na padrao do ansible IP:Porta
 	> $DIR/$RELFULL # Limpar arquivo de relatorio de servidores
     for((s=1;s<=${#IP[@]};s++));do # Loop para correr todos os IP do relatorio
-        echo ${IP[$s]}:${PORTASSH[$s]} >> $DIR/$RELFULL # Gerando reladorio completo em unico arquivo
+        # Gerando relatorio full com todos os hosts
+        echo "${CI[$s]} ansible_ssh_host=${IP[$s]} ansible_ssh_port=${PORTASSH[$s]}" >> $DIR/$RELFULL # Gerando reladorio completo em unico arquivo
         for((a=1;a<=${#LISTASITE[@]};a++));do # Loop que corre toda LISTASITE
             # Se o SITE do host for igual a lista do Site
             if [ "${SITE[$s]}" == "${LISTASITE[$a]}" ];then
